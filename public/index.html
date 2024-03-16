@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teste Socket.IO</title>
+</head>
+<body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io('http://localhost:3000');
+        socket.on('connect', () => {
+            console.log('Conectado ao servidor');
+        });
+    </script>
+</body>
+</html>
