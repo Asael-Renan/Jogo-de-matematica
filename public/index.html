@@ -1,15 +1,33 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Teste Socket.IO</title>
+    <title>Game</title>
+    <link rel="stylesheet" href="./main.css">
 </head>
+
 <body>
+    <!-- Tela de escolher nome -->
+    <div id="name-container" class="center">
+        <h1>Escolha seu nome: </h1>
+        <div id="choose-name">
+            <input type="text" id="name-input" required placeholder="Digite seu nome" autocomplete="off">
+            <button id="confirm-name" onclick="chooseName()">Confimar</button>
+        </div>
+    </div>
+
+    <!-- Tela de espera -->
+    <div id="loading-container" class="center" style="display: none;">
+        <h1 class="loader"></h1>
+    </div>
+
+    <!-- Tela do jogo -->
+    <div id="game-container" class="center" style="display: none;">
+        <h1>Aguardando host</h1>
+    </div>
+
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-        const socket = io('http://localhost:3000');
-        socket.on('connect', () => {
-            console.log('Conectado ao servidor');
-        });
-    </script>
+    <script src="./client.js"></script>
 </body>
+
 </html>

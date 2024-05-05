@@ -1,44 +1,36 @@
 import { Player } from "./player.js";
+import { Account } from "./account.js";
 
 export class Match {
-    constructor(Rounds) {
-        this.rounds = Rounds
-        this.players = []
-        this.accounts = []
+    constructor(Rounds = 10, minNumber = 0, maxNumber = 20) {
+        this.rounds = Rounds;
+        this.players = {};
+        this.accounts = [];
+        this.createAccounts(minNumber, maxNumber);
     }
 
-    createAccounts() {
+    createAccounts(min, max) {
         for (let i = 0; i < this.rounds; i++) {
-            new Account()
-            //criar classe contas
+            const account = new Account(min, max);
+            this.accounts.push(account);
         }
     }
 
     addPlayer(playerId) {
-        if (this.findPlayer(playerId)) {
-            throw new Error('Já existe um player na posição atual')
+        if (this.players[playerId]) {
+            throw new Error('Já existe o jogador: ' + playerId);
         }
-        const player = new Player(playerId)
-        this.players.push(player)
-        return player
+        const player = new Player();
+        this.players[playerId] = player;
+        return player;
     }
 
     removePlayer(playerId) {
-        const player = this.findPlayer(playerId)
+        const player = this.players[playerId];
         if (!player) {
-            throw new Error('Não existe jogador com o id: ' + playerId)
+            throw new Error('Não existe o jogador: ' + playerId);
         }
-        this.players = this.players.filter(player => player.id !== playerId)
-        return player
-    }
-
-    addPoint(playerId) {
-        this.findPlayer(playerId).addPoint()
-    }
-
-    findPlayer(playerId) {
-        const player = this.players.findIndex(player => player.id === playerId)
-        if (player !== -1) return this.players[player]
-        else return null
+        delete this.players[playerId];
+        return player;
     }
 }

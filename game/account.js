@@ -1,13 +1,17 @@
 export class Account {
-    constructor(minNumber, maxNumber) {
+    constructor(minNumber = 0, maxNumber = 20) {
         this.min = minNumber;
         this.max = maxNumber;
         this.firstNumber = this.randomNumber();
         this.sign = this.randomSign();
         this.secondNumber = this.randomNumber();
+        this.inGame = true;
     }
 
     randomNumber() {
+        if (this.min >= this.max) {
+            throw new Error('O número minimo é maior ou igual ao maximo');
+        }
         return Math.floor((Math.random() * (this.max - this.min + 1))) + this.min;
     }
 
@@ -25,6 +29,10 @@ export class Account {
             case ':': result = this.firstNumber / this.secondNumber; break;
         }
         return + result.toFixed(1);
+    }
+
+    finishAccount() {
+        this.inGame = false;
     }
 
     toString() {
