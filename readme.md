@@ -13,7 +13,7 @@ This is a math game in nodeJS.
 First, you need to clone the repository or download the source code.
 
 ```bash
-git clone https://github.com/Asael-Renan/Jogo-de-matematica.git
+git clone https://github.com/Asael-Renan/math-game.git
 ```
 
 ### 2. Install the Required Libraries
