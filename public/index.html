@@ -8,7 +8,7 @@
 
 <body>
     <!-- Tela de escolher nome -->
-    <div id="name-container" class="center">
+    <div id="name-screen" class="center">
         <h1>Escolha seu nome: </h1>
         <div id="choose-name">
             <input type="text" id="name-input" required placeholder="Digite seu nome" autocomplete="off">
@@ -16,15 +16,59 @@
         </div>
     </div>
 
+    <!-- Tela do host -->
+    <div id="host-screen" class="center" style="display: none;">
+        <button id="start-match" onclick="startMatch()">Iniciar partida</button>
+    </div>
+
     <!-- Tela de espera -->
-    <div id="loading-container" class="center" style="display: none;">
+    <div id="loading-screen" class="center" style="display: none;">
         <h1 class="loader"></h1>
+        <h2>Players 2/5</h2>
     </div>
 
     <!-- Tela do jogo -->
-    <div id="game-container" class="center" style="display: none;">
+    <div id="game-screen" class="center" style="display: none;">
         <h1>Aguardando host</h1>
     </div>
+
+    <!-- Ranking -->
+    <footer class="" style="text-align: center;">
+        <table style="margin: auto;">
+            <thead>
+                <th style="width: 10%;"></th>
+                <th style="width: 70%;">Nome</th>
+                <th style="width: 10%;">Tempo</th>
+            </thead>
+            <tbody>
+                <tr>    
+                    <td>1</td>
+                    <td>teste Nome</td>
+                    <td>113,0299</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>teste Nome</td>
+                    <td>3</td>
+                </tr>
+                <tr>    
+                    <td>3</td>
+                    <td>teste Nome</td>
+                    <td>3</td>
+                </tr>
+                <tr>    
+                    <td>4</td>
+                    <td>teste Nome</td>
+                    <td>3</td>
+                </tr>
+                <tr>    
+                    <td>5</td>
+                    <td>teste Nome</td>
+                    <td>3</td>
+                </tr>
+            </tbody>
+        </table>
+    </footer>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="./client.js"></script>

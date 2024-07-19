@@ -5,7 +5,6 @@ export class Account {
         this.firstNumber = this.randomNumber();
         this.sign = this.randomSign();
         this.secondNumber = this.randomNumber();
-        this.inGame = true;
     }
 
     randomNumber() {
@@ -29,10 +28,6 @@ export class Account {
             case ':': result = this.firstNumber / this.secondNumber; break;
         }
         return + result.toFixed(1);
-    }
-
-    finishAccount() {
-        this.inGame = false;
     }
 
     toString() {

@@ -1,18 +1,36 @@
 import { Player } from "./player.js";
-import { Account } from "./account.js";
+import { Round } from "./round.js";
 
 export class Match {
-    constructor(Rounds = 10, minNumber = 0, maxNumber = 20) {
-        this.rounds = Rounds;
+    constructor(Rounds = 10) {
+        this.TotalRounds = Rounds;
+        this.atualRound = null
+        this.maxPlayersNumber = 2
         this.players = {};
-        this.accounts = [];
-        this.createAccounts(minNumber, maxNumber);
+        this.rounds = [];
+        this.started = false;
     }
 
-    createAccounts(min, max) {
+    start() {
+        this.started = true
+    }
+
+    async runing() {
+        const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+        for (let i = 1; i <= this.time; i++) {
+            await delay(1000)
+        }
+        nextRound()
+    }
+
+    nextRound() {
+        
+    }
+
+    create(min, max) {
         for (let i = 0; i < this.rounds; i++) {
-            const account = new Account(min, max);
-            this.accounts.push(account);
+            const round = new Round(min, max);
+            this.rounds.push(round);
         }
     }
 
@@ -20,6 +38,13 @@ export class Match {
         if (this.players[playerId]) {
             throw new Error('Já existe o jogador: ' + playerId);
         }
+        if (Object.keys(this.players).length >= this.maxPlayersNumber) {
+            throw new Error('Número maximo de jogadores excedido.');
+        }
+        if (this.started) {
+            throw new Error('A partida está em andamento.')
+        }
+
         const player = new Player();
         this.players[playerId] = player;
         return player;
