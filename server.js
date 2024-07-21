@@ -1,14 +1,14 @@
 import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
-import { Match } from './game/match.js';
+import { Room } from './game/room.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const match = new Match();
+const room = new Room();
 
 const app = express();
 const server = http.createServer(app);
@@ -24,21 +24,21 @@ app.get('/host', (req, res) => {
 io.on('connection', (socket) => {
 
     console.clear()
-    match.addPlayer(socket.id);
-    console.log(match.players);
+    room.addPlayer(socket.id);
+    console.log(room.players);
 
     socket.on('choose-name', data => {
         console.clear()
-        match.players[socket.id].chooseName(data.name);
-        console.log(match.players);
-        console.log('Emitindo evento host com status:', match.players[socket.id].host);
-        socket.emit('host', match.players[socket.id].host);
+        room.players[socket.id].chooseName(data.name);
+        console.log(room.players);
+        console.log('Emitindo evento host com status:', room.players[socket.id].host);
+        socket.emit('host', room.players[socket.id].host);
     });
 
     socket.on('disconnect', () => {
         console.clear();
-        match.removePlayer(socket.id);
-        console.log(match.players);
+        room.removePlayer(socket.id);
+        console.log(room.players);
     });
 });
 
